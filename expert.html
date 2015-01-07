@@ -198,6 +198,149 @@
 					}
 				}
 			});
+			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:totalEvents',
+					'dimensions': 'ga:eventLabel',
+					'filters': 'ga:eventCategory==Exit',
+					'sort': '-ga:totalEvents',
+					'max-results': '10',
+				},
+				chart: {
+					container: 'chart4',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:searchUniques',
+					'dimensions': 'ga:searchKeyword',
+					'sort': '-ga:searchUniques',
+					'max-results': '10',
+				},
+				chart: {
+					container: 'chart5',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:totalEvents',
+					'dimensions': 'ga:eventLabel',
+					'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
+					'sort': '-ga:totalEvents',
+					'max-results': '10',
+				},
+				chart: {
+					container: 'chart6',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart7 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:sessions',
+					'dimensions': 'ga:source',
+					'filters': 'ga:medium!~sm|sem|tcg',
+				},
+				chart: {
+					container: 'chart7',
+					type: 'PIE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart8 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:totalEvents',
+					'dimensions': 'ga:eventLabel',
+					'filters': 'ga:eventCategory==Outbound Traffic',
+					'sort': 'ga:totalEvents',
+					'max-results': '10',
+				},
+				chart: {
+					container: 'chart8',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart9 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:sessions,ga:pageviewsPerSession',
+					'dimensions': 'ga:medium',
+					'filters': 'ga:medium!~sm|sem|tcg',
+					'sort': 'ga:sessions',
+					'max-results': '10',
+				},
+				chart: {
+					container: 'chart9',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:pageviews',
+					'filters': 'ga:channelGrouping==Social',
+				},
+				chart: {
+					container: 'chart10',
+					type: 'TIMLINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart11 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:sessions,ga:pageviewsPerSession',
+					'dimensions': 'ga:fullReferrer'
+					'filters': 'ga:medium==referral',
+				},
+				chart: {
+					container: 'chart11',
+					type: 'TIMLINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart12 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'metrics': 'ga:sessions,ga:pageviewsPerSession',
+					'dimensions': 'ga:source'
+					'filters': 'ga:medium==social',
+				},
+				chart: {
+					container: 'chart12',
+					type: 'TIMLINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
