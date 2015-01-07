@@ -10,7 +10,9 @@
 <section id="auth-button"></section>
 <section id="view-selector"></section>
 <section id="timeline"></section>
-<section id="table"></section>
+<section id="sponsorship"></section>
+<section id="textlink"></section>
+<section id="pvs"></section>
 
 <!-- Step 2: Load the library. -->
 
@@ -69,7 +71,37 @@ gapi.analytics.ready(function() {
     },
     chart: {
       type: 'TABLE',
-      container: 'table'
+      container: 'sponsorship'
+    }
+  });
+  
+  var table = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:eventAction',
+      'metrics': 'ga:totalEvents',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit;ga:eventAction=@text-link',
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'textlink'
+    }
+  });
+  
+    var table = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:pagePath',
+      'metrics': 'ga:pageviews',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'pvs'
     }
   });
 
@@ -86,7 +118,9 @@ gapi.analytics.ready(function() {
       }
     }
     timeline.set(newIds).execute();
-    table.set(newIds).execute();
+    sponsorship.set(newIds).execute();
+    textlink.set(newIds).execute();
+    pvs.set(newIds).execute();
   });
 });
 </script>
