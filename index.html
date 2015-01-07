@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>McDonald's Chicken "Our Food. Your Questions"</title>
+  <title>McDonald's Chicken Dashboard</title>
 </head>
 <body>
 
@@ -50,7 +50,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory%3D@mcdonalds-chicken-video-unit',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit',
     },
     chart: {
       type: 'LINE',
@@ -65,7 +65,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory%3D@mcdonalds-chicken-video-unit;ga:eventAction%3D@sponsorship',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit;ga:eventAction=@sponsorship',
     },
     chart: {
       type: 'TABLE',
