@@ -13,8 +13,8 @@
 <section id="timeline"></section>
 <section id="sponsorship"></section>
 <section id="textlink"></section>
+<section id="totalpvs"></section>
 <section id="pvs"></section>
-<section id="geos"></section>
 
 <!-- Step 2: Load the library. -->
 
@@ -106,6 +106,20 @@ gapi.analytics.ready(function() {
     }
   });
   
+   var totalpvs = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'metrics': 'ga:pageviews',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'totalpvs'
+    }
+  });
+  
   var pvs = new gapi.analytics.googleCharts.DataChart({
     reportType: 'ga',
     query: {
@@ -113,7 +127,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:pageviews',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:pagePath=@/mcdonalds-chicken/;ga:pagePath=@about.com',
+      'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
       'sort': '-ga:pageviews',
       'max-results': '10',
     },
@@ -123,21 +137,7 @@ gapi.analytics.ready(function() {
     }
   });
   
-   var geos = new gapi.analytics.googleCharts.DataChart({
-    reportType: 'ga',
-    query: {
-      'dimensions': 'ga:city',
-      'metrics': 'ga:totalEvents',
-      'start-date': '30daysAgo',
-      'end-date': 'yesterday',
-      'filters': 'ga:eventCategory=@mcdonalds-chicken',
-    },
-    chart: {
-      type: 'GEO',
-      container: 'geos'
-    }
-  });
-
+  
   // Step 6: Hook up the components to work together.
 
   gapi.analytics.auth.on('success', function(response) {
@@ -154,8 +154,8 @@ gapi.analytics.ready(function() {
     timeline.set(newIds).execute();
     sponsorship.set(newIds).execute();
     textlink.set(newIds).execute();
+    totalpvs.set(newIds).execute();
     pvs.set(newIds).execute();
-    geos.set(newIds).execute();
   });
 });
 </script>
