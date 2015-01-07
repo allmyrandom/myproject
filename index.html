@@ -13,6 +13,7 @@
 <section id="sponsorship"></section>
 <section id="textlink"></section>
 <section id="pvs"></section>
+<section id="geos"></section>
 
 <!-- Step 2: Load the library. -->
 
@@ -106,6 +107,21 @@ gapi.analytics.ready(function() {
       container: 'pvs'
     }
   });
+  
+   var geos = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:metro',
+      'metrics': 'ga:totalEvents',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit',
+    },
+    chart: {
+      type: 'GEO',
+      container: 'geos'
+    }
+  });
 
   // Step 6: Hook up the components to work together.
 
@@ -123,6 +139,7 @@ gapi.analytics.ready(function() {
     sponsorship.set(newIds).execute();
     textlink.set(newIds).execute();
     pvs.set(newIds).execute();
+    geos.set(newIds).execute();
   });
 });
 </script>
