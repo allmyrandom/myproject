@@ -32,12 +32,12 @@
 		</section>
 		<!--Chart 2-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Total Link Clicks</h3>
+			<h3 class="Chart-title">Sponsorship Clicks</h3>
 			<div id="chart2"></div>
 		</section>
 		<!--Chart 3-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Sponsorship Clicks</h3>
+			<h3 class="Chart-title">Total Link Clicks</h3>
 			<div id="chart3"></div>
 		</section>
 		<!--Chart 4-->
@@ -141,24 +141,8 @@
 					}
 				}
 			});
+
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-          'dimensions': 'ga:date',
-          'metrics': 'ga:totalEvents',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:eventCategory=@mcdonalds-chicken',
-				},
-				chart: {
-					container: 'chart2',
-					type: 'LINE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
-			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
           'dimensions': 'ga:eventAction',
           'metrics': 'ga:totalEvents',
@@ -167,7 +151,7 @@
           'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
 				},
 				chart: {
-					container: 'chart3',
+					container: 'chart2',
 					type: 'TABLE',
 					options: {
 						width: '100%'
@@ -175,6 +159,23 @@
 				}
 			});
 	
+			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+          'dimensions': 'ga:date',
+          'metrics': 'ga:totalEvents',
+          'start-date': '30daysAgo',
+          'end-date': 'yesterday',
+          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+				},
+				chart: {
+					container: 'chart3',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
           'dimensions': 'ga:eventAction',
