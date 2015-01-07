@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 	<meta charset="utf-8">
 	<title>Native Ad Dashboard Demo</title>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet'>
@@ -128,10 +126,10 @@
 			 */
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'metrics': 'ga:totalEvents',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
 				},
 				chart: {
 					container: 'chart1',
@@ -144,11 +142,11 @@
 
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'dimensions': 'ga:eventAction',
-          'metrics': 'ga:totalEvents',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
+			          'dimensions': 'ga:eventAction',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
 				},
 				chart: {
 					container: 'chart2',
@@ -161,11 +159,11 @@
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'dimensions': 'ga:date',
-          'metrics': 'ga:totalEvents',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+			          'dimensions': 'ga:date',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
 				},
 				chart: {
 					container: 'chart3',
@@ -178,11 +176,11 @@
 			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'dimensions': 'ga:eventAction',
-          'metrics': 'ga:totalEvents',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
+			          'dimensions': 'ga:eventAction',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
 				},
 				chart: {
 					container: 'chart4',
@@ -195,10 +193,10 @@
 			
 			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'metrics': 'ga:pageviews',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
 				},
 				chart: {
 					container: 'chart5',
@@ -211,13 +209,13 @@
 			
 			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-          'dimensions': 'ga:pagePath',
-          'metrics': 'ga:pageviews',
-          'start-date': '30daysAgo',
-          'end-date': 'yesterday',
-          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
-          'sort': '-ga:pageviews',
-          'max-results': '10',
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+			          'sort': '-ga:pageviews',
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart6',
@@ -257,7 +255,7 @@
 				dataChart3.set({
 					query: data
 				}).execute();
-			  dataChart4.set({
+				dataChart4.set({
 					query: data
 				}).execute();
 				dataChart5.set({
