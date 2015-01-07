@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Native Ads Dashboard Demo</title>
+  <title>Native Ads Dashboard Demo - McDonald's Chicken "Our Food. Your Questions"</title>
 </head>
 <body>
 
@@ -42,14 +42,16 @@ gapi.analytics.ready(function() {
   });
 
   // Step 5: Create the timeline chart.
-
+  
+  McDonalds Chicken: Total Link Clicks
   var timeline = new gapi.analytics.googleCharts.DataChart({
     reportType: 'ga',
     query: {
       'dimensions': 'ga:date',
-      'metrics': 'ga:sessions',
+      'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit'
     },
     chart: {
       type: 'LINE',
@@ -57,13 +59,15 @@ gapi.analytics.ready(function() {
     }
   });
   
+    McDonalds Chicken: Sponsorship Clicks
     var table = new gapi.analytics.googleCharts.DataChart({
     reportType: 'ga',
     query: {
-      'dimensions': 'ga:date',
-      'metrics': 'ga:sessions',
+      'dimensions': 'ga:eventAction',
+      'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit;ga:eventAction=@sponsorship'
     },
     chart: {
       type: 'TABLE',
