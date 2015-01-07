@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Embed API Demo</title>
+  <title>Native Ads Dashboard Demo</title>
 </head>
 <body>
 
@@ -10,6 +10,7 @@
 <section id="auth-button"></section>
 <section id="view-selector"></section>
 <section id="timeline"></section>
+<section id="table"></section>
 
 <!-- Step 2: Load the library. -->
 
@@ -55,6 +56,20 @@ gapi.analytics.ready(function() {
       container: 'timeline'
     }
   });
+  
+    var table = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'dimensions': 'ga:date',
+      'metrics': 'ga:sessions',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'table'
+    }
+  });
 
   // Step 6: Hook up the components to work together.
 
@@ -69,6 +84,7 @@ gapi.analytics.ready(function() {
       }
     }
     timeline.set(newIds).execute();
+    table.set(newIds).execute();
   });
 });
 </script>
