@@ -9,8 +9,8 @@
 
 <section id="auth-button"></section>
 <section id="view-selector"></section>
-<section id="timeline"></section>
 <section id="totalclicks"></section>
+<section id="timeline"></section>
 <section id="sponsorship"></section>
 <section id="textlink"></section>
 <section id="pvs"></section>
@@ -126,7 +126,6 @@ gapi.analytics.ready(function() {
    var geos = new gapi.analytics.googleCharts.DataChart({
     reportType: 'ga',
     query: {
-      'dimensions': 'ga:metro',
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
