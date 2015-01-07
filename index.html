@@ -10,6 +10,7 @@
 <section id="auth-button"></section>
 <section id="view-selector"></section>
 <section id="timeline"></section>
+<section id="totalclicks"></section>
 <section id="sponsorship"></section>
 <section id="textlink"></section>
 <section id="pvs"></section>
@@ -46,6 +47,20 @@ gapi.analytics.ready(function() {
 
   // Step 5: Create the timeline chart.
   
+  var totalclicks = new gapi.analytics.googleCharts.DataChart({
+    reportType: 'ga',
+    query: {
+      'metrics': 'ga:totalEvents',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken',
+    },
+    chart: {
+      type: 'TABLE',
+      container: 'totalclicks'
+    }
+  });
+  
   var timeline = new gapi.analytics.googleCharts.DataChart({
     reportType: 'ga',
     query: {
@@ -53,7 +68,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken',
     },
     chart: {
       type: 'LINE',
@@ -68,7 +83,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit;ga:eventAction=@sponsorship',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
     },
     chart: {
       type: 'TABLE',
@@ -83,7 +98,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit;ga:eventAction=@text-link',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
     },
     chart: {
       type: 'TABLE',
@@ -98,7 +113,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:pageviews',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+      'filters': 'ga:pagePath=@/mcdonalds-chicken/;ga:pagePath=@about.com',
       'sort': '-ga:pageviews',
       'max-results': '10',
     },
@@ -115,7 +130,7 @@ gapi.analytics.ready(function() {
       'metrics': 'ga:totalEvents',
       'start-date': '30daysAgo',
       'end-date': 'yesterday',
-      'filters': 'ga:eventCategory=@mcdonalds-chicken-video-unit',
+      'filters': 'ga:eventCategory=@mcdonalds-chicken',
     },
     chart: {
       type: 'GEO',
@@ -135,6 +150,7 @@ gapi.analytics.ready(function() {
         ids: ids
       }
     }
+    totalclicks.set(newIds).execute();
     timeline.set(newIds).execute();
     sponsorship.set(newIds).execute();
     textlink.set(newIds).execute();
