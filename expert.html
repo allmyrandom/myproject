@@ -168,6 +168,7 @@
 					}
 				}
 			});
+			
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 					'metrics': 'ga:pageviews,ga:bounceRate',
@@ -183,6 +184,7 @@
 					}
 				}
 			});
+			
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 					'metrics': 'ga:socialInteractions',
@@ -198,6 +200,7 @@
 					}
 				}
 			});
+			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 					'metrics': 'ga:totalEvents',
@@ -314,7 +317,7 @@
 			var dataChart11 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 					'metrics': 'ga:sessions,ga:pageviewsPerSession',
-					'dimensions': 'ga:fullReferrer'
+					'dimensions': 'ga:fullReferrer',
 					'filters': 'ga:medium==referral',
 				},
 				chart: {
@@ -329,7 +332,7 @@
 			var dataChart12 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 					'metrics': 'ga:sessions,ga:pageviewsPerSession',
-					'dimensions': 'ga:source'
+					'dimensions': 'ga:source',
 					'filters': 'ga:medium==social',
 				},
 				chart: {
