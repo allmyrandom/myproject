@@ -126,14 +126,14 @@
 			 */
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'metrics': 'ga:totalEvents',
+				  'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
 				},
 				chart: {
 					container: 'chart1',
-					type: 'TABLE',
+					type: 'TIMELINE',
 					options: {
 						width: '100%'
 					}
