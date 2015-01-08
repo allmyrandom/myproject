@@ -189,17 +189,19 @@
 					container: 'chart4',
 					type: 'TABLE',
 					options: {
-						width: '120%'
+						width: '100%'
 					}
 				}
 			});
 			
 			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'metrics': 'ga:pageviews',
+				  'dimensions': 'ga:searchKeyword'
+			          'metrics': 'ga:searchUniques',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+			          'sort': '-ga:searchUniques',
+				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart5',
