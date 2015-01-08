@@ -76,20 +76,13 @@
 
 	</main>
 	
+<script>
 	var s = document.createElement('script');
     s.setAttribute('src', 'http://code.jquery.com/jquery-latest.min.js');
     if (typeof jQuery == 'undefined') {
         document.getElementsByTagName('head')[0].appendChild(s);
     }
-
-var changeRows = (jQuery("#chart2 tr").not(":first"))
-jQuery.each(changeRows, function(index, value){ 
-	var fixTD = jQuery(value).children()[2];
-    var tdValue = jQuery(fixTD).html();
-    jQuery(fixTD).html(parseInt(tdValue) + "%");
-
-})
-
+</script>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
 	<script>
@@ -190,6 +183,13 @@ jQuery.each(changeRows, function(index, value){
 						width: '100%'
 					}
 				}
+				 var changeRows = (jQuery("#chart2 tr").not(":first"))
+				jQuery.each(changeRows, function(index, value){ 
+					var fixTD = jQuery(value).children()[2];
+				    var tdValue = jQuery(fixTD).html();
+				    jQuery(fixTD).html(parseInt(tdValue) + "%");
+				
+			})
 			});
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
