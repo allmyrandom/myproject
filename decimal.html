@@ -183,13 +183,6 @@
 						width: '100%'
 					}
 				}
-				 var changeRows = (jQuery("#chart2 tr").not(":first"))
-				jQuery.each(changeRows, function(index, value){ 
-					var fixTD = jQuery(value).children()[2];
-				    var tdValue = jQuery(fixTD).html();
-				    jQuery(fixTD).html(parseInt(tdValue) + "%");
-				
-			})
 			});
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
