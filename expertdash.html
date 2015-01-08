@@ -53,6 +53,11 @@
 			<h3 class="Chart-title">Clicks on Categories</h3>
 			<div id="chart6"></div>
 		</section>
+		<!--Chart 7-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Sessions by Source</h3>
+			<div id="chart7"></div>
+		</section>
 
 	</main>
 
@@ -225,6 +230,25 @@
 				chart: {
 					container: 'chart6',
 					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart7 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:source',
+			          'metrics': 'ga:sessions',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium!~sm|sem|tcg',
+			          'sort': '-ga:totalEvents',
+			          'max-results': '10',
+				},
+				chart: {
+					container: 'chart7',
+					type: 'BAR',
 					options: {
 						width: '100%'
 					}
