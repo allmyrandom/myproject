@@ -25,35 +25,64 @@
 		</div>
 		<!--Chart 1-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Total Link Clicks</h3>
+			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
 			<div id="chart1"></div>
 		</section>
 		<!--Chart 2-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Sponsorship Clicks</h3>
+			<h3 class="Chart-title">Most Popular Content</h3>
 			<div id="chart2"></div>
 		</section>
 		<!--Chart 3-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Total Link Clicks</h3>
+			<h3 class="Chart-title">Content With Most On Site Social Sharing</h3>
 			<div id="chart3"></div>
 		</section>
 		<!--Chart 4-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Text Link Clicks</h3>
+			<h3 class="Chart-title">Pages With The Most Exits</h3>
 			<div id="chart4"></div>
 		</section>
 		<!--Chart 5-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Total PVs</h3>
+			<h3 class="Chart-title">Site Search</h3>
 			<div id="chart5"></div>
 		</section>
 		<!--Chart 6-->
 		<section class="myChart Component">
-			<h3 class="Chart-title">PVs</h3>
+			<h3 class="Chart-title">Clicks on Categories</h3>
 			<div id="chart6"></div>
 		</section>
-
+		<!--Chart 7-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Sessions by Source</h3>
+			<div id="chart7"></div>
+		</section>
+		<!--Chart 8-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Top Offsite Links</h3>
+			<div id="chart8"></div>
+		</section>
+		<!--Chart 9-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Sessions by Source and Pages/Session</h3>
+			<div id="chart9"></div>
+		</section>
+		<!--Chart 10-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Total Pageviews from Social</h3>
+			<div id="chart10"></div>
+		</section>
+		<!--Chart 11-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Top Links from Other Sites</h3>
+			<div id="chart11"></div>
+		</section>
+		<!--Chart 12-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Sessions Originating from Social</h3>
+			<div id="chart12"></div>
+		</section>
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -126,14 +155,14 @@
 			 */
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'metrics': 'ga:totalEvents',
+				  'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
 				},
 				chart: {
 					container: 'chart1',
-					type: 'TABLE',
+					type: 'TIMELINE',
 					options: {
 						width: '100%'
 					}
@@ -141,11 +170,12 @@
 			});
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventAction',
-			          'metrics': 'ga:totalEvents',
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:pageviews,ga:bounceRate',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
+			          'sort': '-ga:pageviews',
+				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart2',
@@ -158,15 +188,16 @@
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:date',
-			          'metrics': 'ga:totalEvents',
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:socialInteractions',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+			          'sort': '-ga:socialInteractions'
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart3',
-					type: 'LINE',
+					type: 'TABLE',
 					options: {
 						width: '100%'
 					}
@@ -175,11 +206,13 @@
 			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventAction',
+			          'dimensions': 'ga:eventLabel',
 			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
+			          'filters': 'ga:eventCategory==Exit',
+			          'sort': '-ga:totalEvents',
+				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart4',
@@ -192,10 +225,12 @@
 			
 			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'metrics': 'ga:pageviews',
+				  'dimensions': 'ga:searchKeyword',
+			          'metrics': 'ga:searchUniques',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+			          'sort': '-ga:searchUniques',
+				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart5',
@@ -208,17 +243,123 @@
 			
 			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:pagePath',
-			          'metrics': 'ga:pageviews',
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
-			          'sort': '-ga:pageviews',
+			          'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
+			          'sort': '-ga:totalEvents',
 			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart6',
 					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart7 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:source',
+			          'metrics': 'ga:sessions',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium!~sm|sem|tcg',
+				},
+				chart: {
+					container: 'chart7',
+					type: 'PIE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart8 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory==Outbound Traffic',
+			          'sort': 'ga:totalEvents',
+				  'max-results': '10',
+				},
+				chart: {
+					container: 'chart8',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart9 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:medium',
+			          'metrics': 'ga:sessions,ga:pageviewsPerSession',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium!~sm|sem|tcg',
+			          'sort': 'ga:sessions',
+				  'max-results': '10',
+				},
+				chart: {
+					container: 'chart9',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:channelGrouping==Social',
+				},
+				chart: {
+					container: 'chart10',
+					type: 'TIMELINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart11 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:fullReferrer',
+			          'metrics': 'ga:sessions,ga:pageviewsPerSession',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium==referral',
+				},
+				chart: {
+					container: 'chart11',
+					type: 'TIMELINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart12 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:source',
+			          'metrics': 'ga:sessions,ga:pageviewsPerSession',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium==social',
+				},
+				chart: {
+					container: 'chart12',
+					type: 'TIMELINE',
 					options: {
 						width: '100%'
 					}
@@ -261,6 +402,24 @@
 					query: data
 				}).execute();
 				dataChart6.set({
+					query: data
+				}).execute();
+				dataChart7.set({
+					query: data
+				}).execute();
+				dataChart8.set({
+					query: data
+				}).execute();
+				dataChart9.set({
+					query: data
+				}).execute();
+				dataChart10.set({
+					query: data
+				}).execute();
+				dataChart11.set({
+					query: data
+				}).execute();
+				dataChart12.set({
 					query: data
 				}).execute();
 			}
