@@ -58,6 +58,11 @@
 			<h3 class="Chart-title">Sessions by Source</h3>
 			<div id="chart7"></div>
 		</section>
+		<!--Chart 8-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Top Offsite Links</h3>
+			<div id="chart8"></div>
+		</section>
 
 	</main>
 
@@ -255,6 +260,25 @@
 				}
 			});
 			
+			var dataChart8 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory==Outbound Traffic',
+			          'sort': '-ga:totalEvents',
+			          'max-results': '10',
+				},
+				chart: {
+					container: 'chart8',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -294,6 +318,9 @@
 					query: data
 				}).execute();
 				dataChart7.set({
+					query: data
+				}).execute();
+				dataChart8.set({
 					query: data
 				}).execute();
 			}
