@@ -159,11 +159,12 @@
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:date',
-			          'metrics': 'ga:totalEvents',
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:socialInteractions',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+			          'sort': '-ga:socialInteractions',
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart3',
