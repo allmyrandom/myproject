@@ -214,12 +214,12 @@
 			
 			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:pagePath',
-			          'metrics': 'ga:pageviews',
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
-			          'sort': '-ga:pageviews',
+			          'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
+			          'sort': '-ga:totalEvents',
 			          'max-results': '10',
 				},
 				chart: {
