@@ -141,11 +141,12 @@
 			});
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventAction',
-			          'metrics': 'ga:totalEvents',
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:pageviews,ga:bounceRate',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
+			          'sort': '-ga:pageviews',
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart2',
