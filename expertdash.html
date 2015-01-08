@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Dashboard Demo</title>
+	<title>Expert Dashboard Demo</title>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet'>
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -12,7 +12,7 @@
 
 	<header class="Banner">
 		<h1 class="Banner-title">
-    	<a href="/">Expert Dashboard Demo</a>
+    	<a href="/">Expert Dashboard</a>
     	<em>Powered by Embed API</em>
   		</h1>
 		<div class="Banner-auth" id="auth"></div>
@@ -28,6 +28,32 @@
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
 			<div id="chart1"></div>
 		</section>
+		<!--Chart 2-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Most Popular Content</h3>
+			<div id="chart2"></div>
+		</section>
+		<!--Chart 3-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Content With Most On Site Social Sharing</h3>
+			<div id="chart3"></div>
+		</section>
+		<!--Chart 4-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Pages With The Most Exits</h3>
+			<div id="chart4"></div>
+		</section>
+		<!--Chart 5-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Site Search</h3>
+			<div id="chart5"></div>
+		</section>
+		<!--Chart 6-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Clicks on Categories</h3>
+			<div id="chart6"></div>
+		</section>
+
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -100,20 +126,105 @@
 			 */
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-				  'dimensions': 'ga:date',
-			          'metrics': 'ga:pageviews',
+			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
 				},
 				chart: {
 					container: 'chart1',
-					type: 'TIMELINE',
+					type: 'TABLE',
 					options: {
 						width: '100%'
 					}
 				}
 			});
-
+			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:eventAction',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@sponsorship',
+				},
+				chart: {
+					container: 'chart2',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+	
+			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:date',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken',
+				},
+				chart: {
+					container: 'chart3',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:eventAction',
+			          'metrics': 'ga:totalEvents',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
+				},
+				chart: {
+					container: 'chart4',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+				},
+				chart: {
+					container: 'chart5',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:pagePath',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:pagePath=@/mcdonalds-chicken-video-unit/;ga:pagePath=@about.com',
+			          'sort': '-ga:pageviews',
+			          'max-results': '10',
+				},
+				chart: {
+					container: 'chart6',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -135,6 +246,21 @@
 			 */
 			function updateCharts(data) {
 				dataChart1.set({
+					query: data
+				}).execute();
+				dataChart2.set({
+					query: data
+				}).execute();
+				dataChart3.set({
+					query: data
+				}).execute();
+				dataChart4.set({
+					query: data
+				}).execute();
+				dataChart5.set({
+					query: data
+				}).execute();
+				dataChart6.set({
 					query: data
 				}).execute();
 			}
