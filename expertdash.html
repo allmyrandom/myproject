@@ -38,22 +38,7 @@
 			<h3 class="Chart-title">Content With Most On Site Social Sharing</h3>
 			<div id="chart3"></div>
 		</section>
-		<!--Chart 4-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Pages With The Most Exits</h3>
-			<div id="chart4"></div>
-		</section>
-		<!--Chart 5-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Site Search</h3>
-			<div id="chart5"></div>
-		</section>
-		<!--Chart 6-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Clicks on Categories</h3>
-			<div id="chart6"></div>
-		</section>
-	
+
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -194,43 +179,6 @@
 				}
 			});
 			
-			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-				  'dimensions': 'ga:searchKeyword',
-			          'metrics': 'ga:searchUniques',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'sort': '-ga:searchUniques',
-				  'max-results': '10',
-				},
-				chart: {
-					container: 'chart5',
-					type: 'TABLE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
-			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-			          'dimensions': 'ga:eventLabel',
-			          'metrics': 'ga:totalEvents',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
-			          'sort': '-ga:totalEvents',
-			          'max-results': '10',
-				},
-				chart: {
-					container: 'chart6',
-					type: 'TABLE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -261,12 +209,6 @@
 					query: data
 				}).execute();
 				dataChart4.set({
-					query: data
-				}).execute();
-				dataChart5.set({
-					query: data
-				}).execute();
-				dataChart6.set({
 					query: data
 				}).execute();
 			}
