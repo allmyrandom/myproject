@@ -68,6 +68,11 @@
 			<h3 class="Chart-title">Sessions by Source and Pages/Session</h3>
 			<div id="chart9"></div>
 		</section>
+		<!--Chart 10-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Total Pageviews from Social</h3>
+			<div id="chart10"></div>
+		</section>
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -302,6 +307,23 @@
 				}
 			});
 			
+			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:channelGrouping==Social',
+				},
+				chart: {
+					container: 'chart10',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -347,6 +369,9 @@
 					query: data
 				}).execute();
 				dataChart9.set({
+					query: data
+				}).execute();
+				dataChart10.set({
 					query: data
 				}).execute();
 			}
