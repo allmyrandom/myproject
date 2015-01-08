@@ -243,8 +243,7 @@
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
 			          'filters': 'ga:medium!~sm|sem|tcg',
-			          'sort': '-ga:totalEvents',
-			          'max-results': '10',
+			          'sort': '-ga:sessions',
 				},
 				chart: {
 					container: 'chart7',
@@ -291,6 +290,9 @@
 					query: data
 				}).execute();
 				dataChart6.set({
+					query: data
+				}).execute();
+				dataChart7.set({
 					query: data
 				}).execute();
 			}
