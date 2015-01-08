@@ -28,17 +28,6 @@
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
 			<div id="chart1"></div>
 		</section>
-		<!--Chart 2-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Most Popular Content</h3>
-			<div id="chart2"></div>
-		</section>
-		<!--Chart 3-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Content With Most On Site Social Sharing</h3>
-			<div id="chart3"></div>
-		</section>
-
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -124,42 +113,7 @@
 					}
 				}
 			});
-			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-			          'dimensions': 'ga:pagePath',
-			          'metrics': 'ga:pageviews,ga:bounceRate',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'sort': '-ga:pageviews',
-				  'max-results': '10',
-				},
-				chart: {
-					container: 'chart2',
-					type: 'TABLE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-	
-			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-			          'dimensions': 'ga:pagePath',
-			          'metrics': 'ga:socialInteractions',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'sort': '-ga:socialInteractions'
-			          'max-results': '10',
-				},
-				chart: {
-					container: 'chart3',
-					type: 'TABLE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
+
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -181,12 +135,6 @@
 			 */
 			function updateCharts(data) {
 				dataChart1.set({
-					query: data
-				}).execute();
-				dataChart2.set({
-					query: data
-				}).execute();
-				dataChart3.set({
 					query: data
 				}).execute();
 			}
