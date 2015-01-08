@@ -160,25 +160,6 @@
 				}
 			});
 			
-			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-			          'dimensions': 'ga:eventLabel',
-			          'metrics': 'ga:totalEvents',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory==Exit',
-			          'sort': '-ga:totalEvents',
-				  'max-results': '10',
-				},
-				chart: {
-					container: 'chart4',
-					type: 'TABLE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -206,9 +187,6 @@
 					query: data
 				}).execute();
 				dataChart3.set({
-					query: data
-				}).execute();
-				dataChart4.set({
 					query: data
 				}).execute();
 			}
