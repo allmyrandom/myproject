@@ -177,11 +177,13 @@
 			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventAction',
+			          'dimensions': 'ga:eventLabel',
 			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@mcdonalds-chicken;ga:eventAction=@text-link',
+			          'filters': 'ga:eventCategory==Exit',
+			          'sort': '-ga:totalEvents',
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart4',
