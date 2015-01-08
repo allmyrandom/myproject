@@ -10,6 +10,15 @@
 
 <body>
 
+<!-- Include jquery on the page -->
+<script>
+var s = document.createElement('script');
+    s.setAttribute('src', 'http://code.jquery.com/jquery-latest.min.js');
+    if (typeof jQuery == 'undefined') {
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+</script>
+
 	<header class="Banner">
 		<h1 class="Banner-title">
     	<a href="http://allmyrandom.github.io/myproject">Expert Dashboard</a>
@@ -176,6 +185,15 @@
 					}
 				}
 			});
+			
+			var changeRows = (jQuery("#chart2 tr").not(":first"))
+				jQuery.each(changeRows, function(index, value){ 
+				var fixTD = jQuery(value).children()[2];
+    			var tdValue = jQuery(fixTD).html();
+    				jQuery(fixTD).html(parseInt(tdValue) + "%");
+
+			});
+
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
@@ -378,26 +396,8 @@
 		});
 	</script>
 
-<!-- Include jquery on the page to change format of decimals to % -->	
-<script>
-	var s = document.createElement('script');
-    s.setAttribute('src', 'http://code.jquery.com/jquery-latest.min.js');
-    if (typeof jQuery == 'undefined') {
-        document.getElementsByTagName('head')[0].appendChild(s);
-    }
-    
-    var changeRows = (jQuery("#chart2 tr").not(":first"))
-jQuery.each(changeRows, function(index, value){ 
-	var fixTD = jQuery(value).children()[2];
-    var tdValue = jQuery(fixTD).html();
-    jQuery(fixTD).html(parseInt(tdValue) + "%");
-
-})
-</script>
-
 	<footer class="SourceLink">
-		<a href="http://allmyrandom.github.io/myproject/">
-  Back to home</a>
+		<a href="http://allmyrandom.github.io/myproject/">Back to home</a>
 		&nbsp;&#8594;
 	</footer>
 
