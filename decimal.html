@@ -321,6 +321,10 @@ var s = document.createElement('script');
 				}
 			});
 			
+			dataChart9.on('success', function(){
+				updateChart2Bounce();
+			})
+			
 			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 			          'dimensions': 'ga:date',
