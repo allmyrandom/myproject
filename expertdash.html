@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<title>Expert Dashboard Demo</title>
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -177,6 +178,10 @@
 					}
 				}
 			});
+			
+			dataChart2.on('success', function(){
+				updateChart2Bounce();
+			})
 	
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
@@ -384,6 +389,17 @@
 			}
 			// End of analytics.ready
 		});
+		
+		// Format bounce rate	
+		function updateChart2Bounce(){
+		var changeRows = ($("#chart2 tr").not(":first"))
+		$.each(changeRows, function(index, value){ 
+			var fixTD = $(value).children()[2];
+		    	var tdValue = $(fixTD).html();
+		    	$(fixTD).html(parseInt(tdValue) + "%");
+			})
+		}
+		
 	</script>
 
 
