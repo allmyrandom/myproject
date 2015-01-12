@@ -322,7 +322,7 @@ var s = document.createElement('script');
 			});
 			
 			dataChart9.on('success', function(){
-				updateChart2Bounce();
+				updateDecimal();
 			})
 			
 			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
@@ -406,6 +406,17 @@ var s = document.createElement('script');
 
 		})
 	}
+	
+	function updateDecimal(){
+		var changeRows = ($("#chart9 tr").not(":first"))
+		$.each(changeRows, function(index, value){ 
+			var fixTD = $(value).children()[2];
+		    var tdValue = $(fixTD).html();
+		    $(fixTD).html(parseInt(tdValue));
+
+		})
+	}
+	
 	</script>
 
 
