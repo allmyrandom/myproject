@@ -410,7 +410,7 @@ var s = document.createElement('script');
 	function updateDecimal(){
 		var changeRows = ($("#chart9 tr").not(":first"))
 		$.each(changeRows, function(index, value){ 
-			var fixTD = $(value).children()[2];
+			var fixTD = $(value).children()[3];
 		    var tdValue = $(fixTD).html();
 		    $(fixTD).html(parseInt(tdValue));
 
