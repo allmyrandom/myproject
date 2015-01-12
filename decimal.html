@@ -33,6 +33,12 @@ var s = document.createElement('script');
 			<div class="controls" id="viewpicker"></div>
 			<div class="controls" id="datepicker"></div>
 		</div>
+		<!-- Chart A -->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Total Traffic In Pageviews - 30 days ago</h3>
+			<div id="charta"></div>
+		</section>
+		
 		<!--Chart 1-->
 		<section class="myChart Component">
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
@@ -154,6 +160,23 @@ var s = document.createElement('script');
 			 * and Google chart options. It will be rendered inside an element
 			 * with the id "datachert".
 			 */
+			var dataCharta = new gapi.analytics.googleCharts.DataChart({
+				query: {
+				  'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+				},
+				chart: {
+					container: 'chart1',
+					type: 'LINE',
+					options: {
+						width: '100%',
+						title: 'Last 30 Days'
+					}
+				}
+			}); 
+			 
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 				  'dimensions': 'ga:date',
