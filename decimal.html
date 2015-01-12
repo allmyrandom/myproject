@@ -188,6 +188,10 @@ var s = document.createElement('script');
 				}
 			});
 			
+			dataChart2.on('success', function(){
+				updateChart2Bounce();
+			})
+			
 			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 			          'dimensions': 'ga:pagePath',
