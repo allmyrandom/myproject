@@ -374,12 +374,18 @@
 			 */
 			 
 			 //Make date range in chart a static
-			 function {
-			 dataCharta.set({
-					query: data
-				}).execute();
-			 }
-			 
+			 gapi.analytics.auth.on('success', function(response) {
+    				viewSelector.execute();
+  			});
+  			viewSelector.on('change', function(ids) {
+    				var newIds = {
+      					query: {
+					ids: ids
+      					}
+    				}
+    			charta.set(newIds).execute();
+  			});
+    			
 			function updateCharts(data) {
 				dataChart1.set({
 					query: data
