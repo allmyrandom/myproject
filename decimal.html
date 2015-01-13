@@ -29,6 +29,13 @@
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
 			<div id="chart1"></div>
 		</section>
+		
+		<!--Chart 1a-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
+			<div id="chart1a"></div>
+		</section>
+		
 		<!--Chart 2-->
 		<section class="myChart Component">
 			<h3 class="Chart-title">Most Popular Content</h3>
@@ -162,6 +169,21 @@
 				}
 			});
 			
+			var dataChart1a = new gapi.analytics.googleCharts.DataChart({
+				query: {
+				  'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+				},
+				chart: {
+					container: 'chart1',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
 			
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
@@ -359,6 +381,12 @@
 			 * Without this function user would have to set a new query
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
+			 
+			 function updateCharts(data1) {
+				dataChart1a.set({
+				query: data1
+				}).execute();
+			}
 			 
 			 function updateCharts(data) {
 			 	
