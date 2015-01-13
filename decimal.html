@@ -163,8 +163,7 @@
 						width: '100%'
 					}
 				}
-			}); 
-			 
+			});
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 				  'dimensions': 'ga:date',
@@ -180,6 +179,8 @@
 					}
 				}
 			});
+			
+			
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 			          'dimensions': 'ga:pagePath',
@@ -372,19 +373,10 @@
 			 * Without this function user would have to set a new query
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
-			 
-			 //Make date range in chart a static
-			 viewpicker.on('change', function (data) {
-			 	updateViewCharts(data);
-			 });
-			 
-			 function updateViewCharts(data) {
+			 function updateCharts(data) {
 			 	dataCharta.set({
-			 		query:data
-			 	}).execute();
-			 }
-    			
-			function updateCharts(data) {
+					query: data
+				}).execute();
 				dataChart1.set({
 					query: data
 				}).execute();
