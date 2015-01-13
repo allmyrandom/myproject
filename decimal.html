@@ -384,6 +384,12 @@ var s = document.createElement('script');
 			 * Without this function user would have to set a new query
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
+			 
+			 //Make date range in chart a static
+			 dataCharta.set({
+			 	query: data
+			 }).execute();
+			 
 			function updateCharts(data) {
 				dataChart1.set({
 					query: data
