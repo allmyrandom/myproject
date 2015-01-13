@@ -23,11 +23,7 @@
 			<div class="controls" id="viewpicker"></div>
 			<div class="controls" id="datepicker"></div>
 		</div>
-		<!-- Chart A -->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Total Traffic In Pageviews - 30 days ago</h3>
-			<div id="charta"></div>
-		</section>
+
 		<!--Chart 1-->
 		<section class="myChart Component">
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
@@ -149,21 +145,7 @@
 			 * and Google chart options. It will be rendered inside an element
 			 * with the id "datachert".
 			 */
-			var dataCharta = new gapi.analytics.googleCharts.DataChart({
-				query: {
-				  'dimensions': 'ga:date',
-			          'metrics': 'ga:pageviews',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-				},
-				chart: {
-					container: 'chart1',
-					type: 'LINE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
+
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 				  'dimensions': 'ga:date',
@@ -377,11 +359,6 @@
 			 * Without this function user would have to set a new query
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
-			 function updateCharts(data1) {
-			 	dataCharta.set({
-					query: data1
-				}).execute();
-			 }
 			 
 			 function updateCharts(data) {
 			 	
