@@ -361,6 +361,10 @@
 			viewpicker.on('change', function (data) {
 				updateCharts(data);
 			});
+			
+			viewpicker.on('change', function (data1) {
+				updateCharts(data1);
+			});
 			/**
 			 * Register a handler to run whenever the user changes the date.
 			 * The handler will calls updateCharts and passes data as a param.
@@ -373,10 +377,14 @@
 			 * Without this function user would have to set a new query
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
+			 function updateCharts(data1) {
+			 	dataCharta.set({
+					query: data1
+				}).execute();
+			 }
+			 
 			 function updateCharts(data) {
-			 	//dataCharta.set({
-				//	query: data
-				//	}).execute();
+			 	
 				dataChart1.set({
 					query: data
 				}).execute();
