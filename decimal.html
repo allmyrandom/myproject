@@ -28,7 +28,6 @@
 			<h3 class="Chart-title">Total Traffic In Pageviews - 30 days ago</h3>
 			<div id="charta"></div>
 		</section>
-		
 		<!--Chart 1-->
 		<section class="myChart Component">
 			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
@@ -161,8 +160,7 @@
 					container: 'chart1',
 					type: 'LINE',
 					options: {
-						width: '100%',
-						title: 'Last 30 Days'
+						width: '100%'
 					}
 				}
 			}); 
@@ -376,9 +374,11 @@
 			 */
 			 
 			 //Make date range in chart a static
-			 dataCharta.set({
-			 	query: data
-			 }).execute();
+			 function {
+			 dataChart1.set({
+					query: data
+				}).execute();
+			 }
 			 
 			function updateCharts(data) {
 				dataChart1.set({
