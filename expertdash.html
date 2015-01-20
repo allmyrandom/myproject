@@ -74,6 +74,11 @@
 			<h3 class="Chart-title">Total Pageviews from Social</h3>
 			<div id="chart10"></div>
 		</section>
+		<!--Chart 11-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Top Referrers from Social</h3>
+			<div id="chart11"></div>
+		</section>
 
 	</main>
 
@@ -335,6 +340,23 @@
 				}
 			});
 			
+			var dataChart11 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:source',
+			          'metrics': 'ga:pageviews, ga:pageviewsPerSession',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium==social',
+				},
+				chart: {
+					container: 'chart11',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
 			/**
 			 * Register a handler to run whenever the user changes the view.
 			 * The handler will calls updateCharts and passes data as a param
@@ -383,6 +405,9 @@
 					query: data
 				}).execute();
 				dataChart10.set({
+					query: data
+				}).execute();
+				dataChart11.set({
 					query: data
 				}).execute();
 
