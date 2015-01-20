@@ -343,7 +343,7 @@
 			var dataChart11 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 			          'dimensions': 'ga:source',
-			          'metrics': 'ga:pageviews, ga:pageviewsPerSession',
+			          'metrics': 'ga:sessions, ga:pageviewsPerSession',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
 			          'filters': 'ga:medium==social',
@@ -352,7 +352,8 @@
 					container: 'chart11',
 					type: 'TABLE',
 					options: {
-						width: '100%'
+						width: '100%',
+						sort: 'enable'
 					}
 				}
 			});
