@@ -25,6 +25,14 @@
 			<div class="controls" id="viewpicker"></div>
 			<div class="controls" id="datepicker"></div>
 		</div>
+		
+		<!-- ANALYTICS PROS start -->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Overlay</h3>
+			<div id="chart-1-container" style="height:300px;"></div>
+			<ol class="Chartjs-legend" id="legend-1-container"></ol>
+		</section>
+		<!-- ANALYTICS PROS end -->
 
 		<!--Chart 1-->
 		<section class="myChart Component">
@@ -83,6 +91,7 @@
 			<h3 class="Chart-title">Total Pageviews from Social</h3>
 			<div id="chart10"></div>
 		</section>
+		
 
 	</main>
 	
@@ -110,6 +119,11 @@
 	<script src="js/promise.js"></script>
 	<script src="js/viewpicker.js"></script>
 	<script src="js/datepicker.js"></script>
+	
+	<!-- ANALYTICS PROS start -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+	<!-- ANALYTICS PROS end -->
 
 	<script>
 		gapi.analytics.ready(function () {
@@ -154,6 +168,80 @@
 			 * and Google chart options. It will be rendered inside an element
 			 * with the id "datachert".
 			 */
+			 
+			 /* ANALYTICS PROS ADD START*/
+			function query(params) {
+			    return new Promise(function(resolve, reject) {
+			      var data = new gapi.analytics.report.Data({query: params});
+			      data.once('success', function(response) { resolve(response); })
+			          .once('error', function(response) { reject(response); })
+			          .execute();
+			    });
+			  }
+
+		    function renderWeekOverWeekChart(ids) {
+
+			    // Adjust `now` to experiment with different days, for testing only...
+			    var now = moment(); // .subtract(3, 'day');
+
+			    var thisWeek = query({
+			      'ids': ids,
+			      'dimensions': 'ga:date,ga:nthDay',
+			      'metrics': 'ga:sessions',
+			      'start-date': moment(now).subtract(4, 'week').format('YYYY-MM-DD'),
+			      'end-date': moment(now).format('YYYY-MM-DD')
+			    });
+
+			    var lastWeek = query({
+			      'ids': ids,
+			      'dimensions': 'ga:date,ga:nthDay',
+			      'metrics': 'ga:sessions',
+			      'start-date': moment(now).subtract(8, 'week')
+			          .format('YYYY-MM-DD'),
+			      'end-date': moment(now).subtract(4, 'week')
+			          .format('YYYY-MM-DD')
+			    });
+
+			    Promise.all([thisWeek, lastWeek]).then(function(results) {
+
+			      var data1 = results[0].rows.map(function(row) { return +row[2]; });
+			      var data2 = results[1].rows.map(function(row) { return +row[2]; });
+			      var labels = results[1].rows.map(function(row) { return +row[0]; });
+
+
+			      labels = labels.map(function(label) {
+			        return moment(label, 'YYYYMMDD').format('MM/DD') + " vs " + moment(label, 'YYYYMMDD').add(4, "week").format('MM/DD');
+			      });
+
+			      var data = {
+			        labels : labels,
+			        datasets : [
+			          {
+			            label: '8-4 Weeks ago',
+			            fillColor : "rgba(220,220,220,0.5)",
+			            strokeColor : "rgba(220,220,220,1)",
+			            pointColor : "rgba(220,220,220,1)",
+			            pointStrokeColor : "#fff",
+			            data : data2
+			          },
+			          {
+			            label: 'Last 4 Weeks',
+			            fillColor : "rgba(151,187,205,0.5)",
+			            strokeColor : "rgba(151,187,205,1)",
+			            pointColor : "rgba(151,187,205,1)",
+			            pointStrokeColor : "#fff",
+			            data : data1
+			          }
+			        ]
+			      };
+
+			      new Chart(makeCanvas('chart-1-container')).Line(data);
+			      generateLegend('legend-1-container', data.datasets);
+			    });
+			  }
+
+		    
+		    /* ANALYTICS PROS ADD END*/
 
 			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
 				query: {
@@ -390,6 +478,10 @@
 				}).execute();
 			 
 			function updateCharts(data) {
+				
+				//ANALYTICS PROS START
+				renderWeekOverWeekChart(data.ids);
+				//ANALYTICS PROS END
 			 	
 				dataChart1.set({
 					query: data
