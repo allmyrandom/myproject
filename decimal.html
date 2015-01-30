@@ -28,7 +28,7 @@
 		
 		<!-- ANALYTICS PROS start -->
 		<section class="myChart Component">
-			<h3 class="Chart-title">Overlay</h3>
+			<h3 class="Chart-title">Last Month PVs Compared to Previous Month</h3>
 			<div id="chart-1-container" style="height:300px;"></div>
 			<ol class="Chartjs-legend" id="legend-1-container"></ol>
 		</section>
@@ -170,6 +170,12 @@
 			 */
 			 
 			 /* ANALYTICS PROS ADD START*/
+			 /**
+			 * Extend the Embed APIs `gapi.analytics.report.Data` component to
+			 * return a promise the is fulfilled with the value returned by the API.
+			 * @param {Object} params The request parameters.
+			 * @return {Promise} A promise.
+			 */
 			function query(params) {
 			    return new Promise(function(resolve, reject) {
 			      var data = new gapi.analytics.report.Data({query: params});
@@ -217,7 +223,7 @@
 			        labels : labels,
 			        datasets : [
 			          {
-			            label: '8-4 Weeks ago',
+			            label: 'Previous Month (8-4 weeks ago)',
 			            fillColor : "rgba(220,220,220,0.5)",
 			            strokeColor : "rgba(220,220,220,1)",
 			            pointColor : "rgba(220,220,220,1)",
@@ -225,7 +231,7 @@
 			            data : data2
 			          },
 			          {
-			            label: 'Last 4 Weeks',
+			            label: 'Last Month (4 weeks ago)',
 			            fillColor : "rgba(151,187,205,0.5)",
 			            strokeColor : "rgba(151,187,205,1)",
 			            pointColor : "rgba(151,187,205,1)",
@@ -565,7 +571,7 @@
 	   * Chart.js dataset.
 	   * @param {string} id The id attribute of the element to host the legend.
 	   * @param {Array.<Object>} items A list of labels and colors for the legend.
-    */
+    	*/
 	function generateLegend(id, items) {
 	    var legend = document.getElementById(id);
 	    legend.innerHTML = items.map(function(item) {
