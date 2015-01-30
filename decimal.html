@@ -541,6 +541,12 @@
 		})
 	}
 	
+	/**
+   	* Create a new canvas inside the specified element. Set it to be the width
+   	* and height of its container.
+   	* @param {string} id The id attribute of the element to host the canvas.
+   	* @return {RenderingContext} The 2D canvas context.
+   	*/
 	function makeCanvas(id) {
 	    var container = document.getElementById(id);
 	    var canvas = document.createElement('canvas');
@@ -553,7 +559,6 @@
 
 	    return ctx;
 	  }
-
 
 	/**
 	   * Create a visual legend inside the specified element based off of a
