@@ -77,7 +77,13 @@
 			<h3 class="Chart-title">Total Pageviews from Social</h3>
 			<div id="chart10"></div>
 		</section>
-		
+		<!-- ANALYTICS PROS start -->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Overlay</h3>
+			<div id="chart-1-container" style="height:300px;"></div>
+			<ol class="Chartjs-legend" id="legend-1-container"></ol>
+		</section>
+		<!-- ANALYTICS PROS end -->
 	</main>
 
 	<!-- This code snippet loads the Embed API. Do not modify! -->
@@ -105,6 +111,11 @@
 	<script src="js/viewpicker.js"></script>
 	<script src="js/datepicker.js"></script>
 	<script src="js/active-users.js"></script>
+
+	<!-- ANALYTICS PROS start -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+	<!-- ANALYTICS PROS end -->
 
 	<script>
 		gapi.analytics.ready(function () {
@@ -339,6 +350,79 @@
 				}
 			});
 			
+			/* ANALYTICS PROS ADD START*/
+			function query(params) {
+			    return new Promise(function(resolve, reject) {
+			      var data = new gapi.analytics.report.Data({query: params});
+			      data.once('success', function(response) { resolve(response); })
+			          .once('error', function(response) { reject(response); })
+			          .execute();
+			    });
+			  }
+
+		    function renderWeekOverWeekChart(ids) {
+
+			    // Adjust `now` to experiment with different days, for testing only...
+			    var now = moment(); // .subtract(3, 'day');
+
+			    var thisWeek = query({
+			      'ids': ids,
+			      'dimensions': 'ga:date,ga:nthDay',
+			      'metrics': 'ga:sessions',
+			      'start-date': moment(now).subtract(4, 'week').format('YYYY-MM-DD'),
+			      'end-date': moment(now).format('YYYY-MM-DD')
+			    });
+
+			    var lastWeek = query({
+			      'ids': ids,
+			      'dimensions': 'ga:date,ga:nthDay',
+			      'metrics': 'ga:sessions',
+			      'start-date': moment(now).subtract(8, 'week')
+			          .format('YYYY-MM-DD'),
+			      'end-date': moment(now).subtract(4, 'week')
+			          .format('YYYY-MM-DD')
+			    });
+
+			    Promise.all([thisWeek, lastWeek]).then(function(results) {
+
+			      var data1 = results[0].rows.map(function(row) { return +row[2]; });
+			      var data2 = results[1].rows.map(function(row) { return +row[2]; });
+			      var labels = results[1].rows.map(function(row) { return +row[0]; });
+
+
+			      labels = labels.map(function(label) {
+			        return moment(label, 'YYYYMMDD').format('MM/DD') + " vs " + moment(label, 'YYYYMMDD').add(4, "week").format('MM/DD');
+			      });
+
+			      var data = {
+			        labels : labels,
+			        datasets : [
+			          {
+			            label: '8-4 Weeks ago',
+			            fillColor : "rgba(220,220,220,0.5)",
+			            strokeColor : "rgba(220,220,220,1)",
+			            pointColor : "rgba(220,220,220,1)",
+			            pointStrokeColor : "#fff",
+			            data : data2
+			          },
+			          {
+			            label: 'Last 4 Weeks',
+			            fillColor : "rgba(151,187,205,0.5)",
+			            strokeColor : "rgba(151,187,205,1)",
+			            pointColor : "rgba(151,187,205,1)",
+			            pointStrokeColor : "#fff",
+			            data : data1
+			          }
+			        ]
+			      };
+
+			      new Chart(makeCanvas('chart-1-container')).Line(data);
+			      generateLegend('legend-1-container', data.datasets);
+			    });
+			  }
+
+		    
+		    /* ANALYTICS PROS ADD END*/
 			
 			/**
 			 * Register a handler to run whenever the user changes the view.
@@ -360,6 +444,11 @@
 			 * for each chart in both the datepicker and viewpicker event handler functions.
 			 */
 			function updateCharts(data) {
+
+				//ANALYTICS PROS START
+				renderWeekOverWeekChart(data.ids);
+				//ANALYTICS PROS END
+
 				dataChart1.set({
 					query: data
 				}).execute();
@@ -408,6 +497,35 @@
 
 		})
 	}
+
+	function makeCanvas(id) {
+	    var container = document.getElementById(id);
+	    var canvas = document.createElement('canvas');
+	    var ctx = canvas.getContext('2d');
+
+	    container.innerHTML = '';
+	    canvas.width = container.offsetWidth;
+	    canvas.height = container.offsetHeight;
+	    container.appendChild(canvas);
+
+	    return ctx;
+	  }
+
+
+	/**
+	   * Create a visual legend inside the specified element based off of a
+	   * Chart.js dataset.
+	   * @param {string} id The id attribute of the element to host the legend.
+	   * @param {Array.<Object>} items A list of labels and colors for the legend.
+    */
+	function generateLegend(id, items) {
+	    var legend = document.getElementById(id);
+	    legend.innerHTML = items.map(function(item) {
+	      var color = item.color || item.fillColor;
+	      var label = item.label;
+	      return '<li><i style="background:' + color + '"></i>' + label + '</li>';
+	    }).join('');
+	  }
 
 		
 	</script>
