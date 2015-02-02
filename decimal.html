@@ -36,14 +36,8 @@
 
 		<!--Chart 1-->
 		<section class="myChart Component">
-			<h3 class="Chart-title" title="This is the tooltip">Total Traffic In Pageviews</h3>
+			<h3 class="Chart-title" title="Tip: This shows Total Pageviews for Date Range Selected.">Total Traffic In Pageviews</h3>
 			<div id="chart1"></div>
-		</section>
-		
-		<!--Chart 1a-->
-		<section class="myChart Component">
-			<h3 class="Chart-title">Total Traffic In Pageviews</h3>
-			<div id="chart1a"></div>
 		</section>
 		
 		<!--Chart 2-->
@@ -56,6 +50,13 @@
 			<h3 class="Chart-title">Content With Most On Site Social Sharing</h3>
 			<div id="chart3"></div>
 		</section>
+		
+		<!--Chart 3a-->
+		<section class="myChart Component">
+			<h3 class="Chart-title">Content With Most On Site Social Sharing by Social Network</h3>
+			<div id="chart3a"></div>
+		</section>
+		
 		<!--Chart 4-->
 		<section class="myChart Component">
 			<h3 class="Chart-title">Pages With The Most Exits</h3>
@@ -266,22 +267,6 @@
 				}
 			});
 			
-			var dataChart1a = new gapi.analytics.googleCharts.DataChart({
-				query: {
-				  'dimensions': 'ga:date',
-			          'metrics': 'ga:pageviews',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-				},
-				chart: {
-					container: 'chart1a',
-					type: 'LINE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
-			
 			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
 				query: {
 			          'dimensions': 'ga:pagePath',
@@ -316,6 +301,24 @@
 				},
 				chart: {
 					container: 'chart3',
+					type: 'TABLE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart3a = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:pagePath, ga:socialNetwork',
+			          'metrics': 'ga:socialInteractions',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'sort': '-ga:socialInteractions',
+			          'max-results': '20',
+				},
+				chart: {
+					container: 'chart3a',
 					type: 'TABLE',
 					options: {
 						width: '100%'
@@ -500,6 +503,9 @@
 					query: data
 				}).execute();
 				dataChart3.set({
+					query: data
+				}).execute();
+				dataChart3a.set({
 					query: data
 				}).execute();
 				dataChart4.set({
