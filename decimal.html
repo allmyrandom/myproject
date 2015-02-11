@@ -338,6 +338,23 @@
 			
 			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
 				query: {
+			          'dimensions': 'ga:date',
+			          'metrics': 'ga:pageviews',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'filters': 'ga:medium==social',
+				},
+				chart: {
+					container: 'chart4',
+					type: 'LINE',
+					options: {
+						width: '100%'
+					}
+				}
+			});
+			
+			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
+				query: {
 			          'dimensions': 'ga:eventLabel',
 			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
@@ -345,25 +362,6 @@
 			          'filters': 'ga:eventCategory==Exit',
 			          'sort': '-ga:totalEvents',
 			          'max-results': '10',
-				},
-				chart: {
-					container: 'chart4',
-					type: 'TABLE',
-					options: {
-						width: '100%',
-						sort: 'enable'
-					}
-				}
-			});
-			
-			var dataChart5 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-				  'dimensions': 'ga:searchKeyword',
-			          'metrics': 'ga:searchUniques',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'sort': '-ga:searchUniques',
-				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart5',
@@ -377,13 +375,12 @@
 			
 			var dataChart6 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventLabel',
-			          'metrics': 'ga:totalEvents',
+				  'dimensions': 'ga:searchKeyword',
+			          'metrics': 'ga:searchUniques',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
-			          'sort': '-ga:totalEvents',
-			          'max-results': '10',
+			          'sort': '-ga:searchUniques',
+				  'max-results': '10',
 				},
 				chart: {
 					container: 'chart6',
@@ -397,16 +394,17 @@
 			
 			var dataChart7 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:source',
-			          'metrics': 'ga:sessions',
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'sort': '-ga:sessions',
-			          'max-results': '5',
+			          'filters': 'ga:eventAction=@categoryList;ga:eventLabel=~^http;ga:eventLabel=@/od/;ga:eventCategory!@(not set)',
+			          'sort': '-ga:totalEvents',
+			          'max-results': '10',
 				},
 				chart: {
 					container: 'chart7',
-					type: 'BAR',
+					type: 'TABLE',
 					options: {
 						width: '100%',
 						sort: 'enable'
@@ -416,17 +414,16 @@
 			
 			var dataChart8 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:eventLabel',
-			          'metrics': 'ga:totalEvents',
+			          'dimensions': 'ga:source',
+			          'metrics': 'ga:sessions',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'filters': 'ga:eventCategory=@outbound traffic',
-			          'sort': '-ga:totalEvents',
-			          'max-results': '10',
+			          'sort': '-ga:sessions',
+			          'max-results': '5',
 				},
 				chart: {
 					container: 'chart8',
-					type: 'TABLE',
+					type: 'BAR',
 					options: {
 						width: '100%',
 						sort: 'enable'
@@ -436,11 +433,12 @@
 			
 			var dataChart9 = new gapi.analytics.googleCharts.DataChart({
 				query: {
-			          'dimensions': 'ga:medium',
-			          'metrics': 'ga:sessions,ga:pageviewsPerSession',
+			          'dimensions': 'ga:eventLabel',
+			          'metrics': 'ga:totalEvents',
 			          'start-date': '30daysAgo',
 			          'end-date': 'yesterday',
-			          'sort': '-ga:sessions',
+			          'filters': 'ga:eventCategory=@outbound traffic',
+			          'sort': '-ga:totalEvents',
 			          'max-results': '10',
 				},
 				chart: {
@@ -453,26 +451,30 @@
 				}
 			});
 			
+			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+			          'dimensions': 'ga:medium',
+			          'metrics': 'ga:sessions,ga:pageviewsPerSession',
+			          'start-date': '30daysAgo',
+			          'end-date': 'yesterday',
+			          'sort': '-ga:sessions',
+			          'max-results': '10',
+				},
+				chart: {
+					container: 'chart10',
+					type: 'TABLE',
+					options: {
+						width: '100%',
+						sort: 'enable'
+					}
+				}
+			});
+			
 			dataChart9.on('success', function(){
 				updateDecimal();
 			})
 			
-			var dataChart10 = new gapi.analytics.googleCharts.DataChart({
-				query: {
-			          'dimensions': 'ga:date',
-			          'metrics': 'ga:pageviews',
-			          'start-date': '30daysAgo',
-			          'end-date': 'yesterday',
-			          'filters': 'ga:medium==social',
-				},
-				chart: {
-					container: 'chart10',
-					type: 'LINE',
-					options: {
-						width: '100%'
-					}
-				}
-			});
+
 			
 			/**
 			 * Register a handler to run whenever the user changes the view.
